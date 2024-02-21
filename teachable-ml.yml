@@ -1,0 +1,15 @@
+name: teachable-ml
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.9
+  - pip
+  - pip:
+      - tensorflow-macos
+      - tensorflow-metal
+      - pillow
+      - matplotlib
+      - scikit-learn
+      - keras==2.13.1
+      - numpy==1.24.3
