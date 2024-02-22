@@ -1,4 +1,4 @@
-# Teachable Machine Environment Setup
+# Teachable Machine Student Contest Environment Setup
 
 This guide provides instructions on how to set up the Python environment required for running the Teachable Machine project on macOS, specifically optimized for Apple Silicon (M1/M2 chips).
 
