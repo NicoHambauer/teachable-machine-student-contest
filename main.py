@@ -7,9 +7,15 @@ from PIL import Image, ImageOps  # Install pillow instead of PIL
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
+import shutil
 
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+
+
+def demo():
+    sample_path = "testset/Head-samples/58.jpg"
+    teachable_model_predict_sample(model_path, labels_path, sample_path)
 
 
 def teachable_model_predict_sample(model_path, labels_path, img_path="testset/Head-samples/58.jpg"):
@@ -121,16 +127,30 @@ def update_student_score_in_csv(email, score, csv_file_path):
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    evaluate_challenge = True
     # Adjust these paths to match your directory structure
-    model_path = "converted_keras/keras_model.h5"
-    labels_path = "converted_keras/labels.txt"
-
-    sample_path = "testset/Head-samples/58.jpg"
-    testset_directory = "testset/"
-
-    if evaluate_challenge:
-        test_accuracy = evaluate_model_on_testset(model_path, labels_path, testset_directory)
-        print("Test accuracy:", f"{test_accuracy:.4f}")
+    name = input("Enter your name: ")
+    model_dir = f"models/{name}" # YOUR NAME
+    # crate that subdirectory for name if it does not exist, otherwise promt the user with a failure message
+    if not os.path.exists(model_dir):
+        os.makedirs(model_dir)
     else:
-        teachable_model_predict_sample(model_path, labels_path, sample_path)
+        print(f"Directory {model_dir} already exists. Please delete it or choose a different name.")
+        exit(1)
+
+    # move the folder converted_keras/ with the entire subdirs and files to the new subdirectory, handling the case if it already exists
+    # recursively move the subdirectories and files
+    if os.path.exists("converted_keras"):
+        target_dir = os.path.join(model_dir, "converted_keras")
+        # Move the directory, automatically handling subdirectories and files
+        shutil.move("converted_keras", target_dir)
+    else:
+        print("Directory 'converted_keras' does not exist. Please create it and put the converted model there.")
+        exit(1)
+
+
+    model_path = f"{model_dir}/converted_keras/keras_model.h5"
+    labels_path = f"{model_dir}/converted_keras/labels.txt"
+    testset_directory = "final_testset/"
+
+    test_accuracy = evaluate_model_on_testset(model_path, labels_path, testset_directory)
+    print("Test accuracy:", f"{test_accuracy:.4f}")

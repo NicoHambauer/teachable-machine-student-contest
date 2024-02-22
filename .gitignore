@@ -1,8 +1,6 @@
 # this is a gitignore file
 # ignore the testset folder
 # also the trainset
-testset/
-trainset/
 *.iml
 *.ipr
 *.iws
@@ -13,3 +11,5 @@ trainset/
 
 misc/
 converted_keras/
+final_testset/
+models/
