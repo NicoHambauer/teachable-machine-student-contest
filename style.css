@@ -17,3 +17,7 @@ tr:nth-child(even) {
 tr:hover {
   background-color: #ddd;
 }
+tr.first-place {
+  background-color: rgba(255, 210, 0, 0.5); /* Gold color for the first place */
+  font-weight: bold;
+}
