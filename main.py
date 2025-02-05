@@ -1,13 +1,12 @@
 # Nico Hambauer <nico.hambauer@fau.de> 2024
 import csv
-# export PIPENV_PYTHON=$(conda run which python)
 import os
+import zipfile
 from keras.models import load_model  # TensorFlow is required for Keras to work
 from PIL import Image, ImageOps  # Install pillow instead of PIL
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
-import shutil
 
 # Press ⌃R to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
@@ -130,21 +129,34 @@ if __name__ == '__main__':
     # Adjust these paths to match your directory structure
     name = input("Enter your name: ")
     model_dir = f"models/{name}" # YOUR NAME
-    # crate that subdirectory for name if it does not exist, otherwise promt the user with a failure message
+    # create that subdirectory for name if it does not exist, otherwise prompt the user with a failure message
     if not os.path.exists(model_dir):
         os.makedirs(model_dir)
     else:
         print(f"Directory {model_dir} already exists. Please delete it or choose a different name.")
         exit(1)
 
-    # move the folder converted_keras/ with the entire subdirs and files to the new subdirectory, handling the case if it already exists
-    # recursively move the subdirectories and files
-    if os.path.exists("converted_keras"):
+    # Define the path to the downloaded zip file
+    zip_path = os.path.expanduser("~/Downloads/converted_keras.zip")
+
+    # Check if the zip file exists
+    if os.path.exists(zip_path):
         target_dir = os.path.join(model_dir, "converted_keras")
-        # Move the directory, automatically handling subdirectories and files
-        shutil.move("converted_keras", target_dir)
+        # Create the target directory if it doesn't exist
+        if not os.path.exists(target_dir):
+            os.makedirs(target_dir)
+        # Unzip the file into the target directory
+        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+            zip_ref.extractall(target_dir)
+        # Check if the files were extracted successfully
+        if os.path.exists(f"{target_dir}/keras_model.h5") and os.path.exists(f"{target_dir}/labels.txt"):
+            # Delete the zip file
+            os.remove(zip_path)
+        else:
+            print("Model files were not extracted successfully. Please check the zip file.")
+            exit(1)
     else:
-        print("Directory 'converted_keras' does not exist. Please create it and put the converted model there.")
+        print(f"Zip file '{zip_path}' does not exist. Please download it and place it in the Downloads folder.")
         exit(1)
 
 
