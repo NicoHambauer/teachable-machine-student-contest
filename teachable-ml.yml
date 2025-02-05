@@ -6,7 +6,7 @@ dependencies:
   - python=3.9
   - pip
   - pip:
-      - tensorflow-macos
+      - tensorflow-macos==2.13.1
       - tensorflow-metal
       - pillow
       - matplotlib
