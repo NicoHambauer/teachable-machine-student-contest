@@ -1,0 +1,36 @@
+name: Update gh-pages
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '_data/leaderboard.csv'
+
+jobs:
+  update-gh-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v2
+        with:
+          # We need the full history to be able to switch branches
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Copy file from main to gh-pages
+        run: |
+          # Checkout gh-pages
+          git checkout gh-pages
+
+          # Copy the file from main branch
+          git checkout main -- _data/leaderboard.csv
+
+          # Commit and push the change
+          git add _data/leaderboard.csv
+          git commit -m "Update leaderboard.csv from main branch"
+          git push origin gh-pages
