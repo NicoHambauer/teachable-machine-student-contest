@@ -89,39 +89,29 @@ def evaluate_model_on_testset(model_dir, testset_directory):
 
 
 def record_students_score(pseudonym, score, csv_file_path):
-    """
-    Records the student's score in a CSV exactly once using pandas.
-    If the pseudonym already exists, the function does nothing (no updates).
-    If the pseudonym does not exist, a new row is added with the given score.
-    """
 
-    # 1. Create an empty CSV with correct columns if it doesn't exist
     if not os.path.exists(csv_file_path):
         # Create a DataFrame with just the headers, and save it
         pd.DataFrame(columns=["pseudonym", "accuracy"]).to_csv(csv_file_path, index=False)
 
-    # 2. Read existing data
     df = pd.read_csv(csv_file_path)
 
-    # 3. Check if pseudonym already exists
     if pseudonym in df["pseudonym"].values:
         print(f"Pseudonym '{pseudonym}' already exists in the leaderboard. Not updating.")
-        return  # Do nothing if it exists
+        exit(1)
 
-    # 4. Append the new row (as a DataFrame) only if pseudonym not found
     new_row_df = pd.DataFrame([{"pseudonym": pseudonym, "accuracy": f"{score:.4f}"}])
     df = pd.concat([df, new_row_df], ignore_index=True)
 
-    # 5. Save back to CSV
     df.to_csv(csv_file_path, index=False)
     print(f"New entry for pseudonym '{pseudonym}' recorded with score {score:.4f}.")
 
-# Press the green button in the gutter to run the script.
+
 if __name__ == '__main__':
-    # Adjust these paths to match your directory structure
+
     pseudonym = input("Enter an imaginary name for the contest: ")
     student_dir = f"models/{pseudonym}"
-    # crate that subdirectory for name if it does not exist, otherwise promt the user with a failure message
+
     if not os.path.exists(student_dir):
         os.makedirs(student_dir)
     else:
