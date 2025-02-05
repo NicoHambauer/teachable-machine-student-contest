@@ -1,78 +1,62 @@
 # Nico Hambauer <nico.hambauer@fau.de> 2024
-import csv
 import os
+import pandas as pd
 import zipfile
-from keras.models import load_model  # TensorFlow is required for Keras to work
+from tensorflow.keras.models import load_model  # TensorFlow is required for Keras to work
 from PIL import Image, ImageOps  # Install pillow instead of PIL
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
 
-# Press ⌃R to execute it or replace it with your code.
-# Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
+np.set_printoptions(suppress=True)
 
+def predict_single(model_dir, img_path):
 
-def demo():
-    sample_path = "testset/Head-samples/58.jpg"
-    teachable_model_predict_sample(model_path, labels_path, sample_path)
+    model_path = f"{model_dir}/keras_model.h5"
+    labels_path = f"{model_dir}/labels.txt"
 
-
-def teachable_model_predict_sample(model_path, labels_path, img_path="testset/Head-samples/58.jpg"):
-    # Disable scientific notation for clarity
-    np.set_printoptions(suppress=True)
-    # Load the model
     model = load_model(model_path, compile=False)
-
-    # Load the labels
     class_names = open(labels_path, "r").readlines()
 
-    # Create the array of the right shape to feed into the keras model
-    # The 'length' or number of images you can put into the array is
-    # determined by the first position in the shape tuple, in this case 1
     data = np.ndarray(shape=(1, 224, 224, 3), dtype=np.float32)
 
-    # Replace this with the path to your image
     image = Image.open(img_path).convert("RGB")
 
-    # resizing the image to be at least 224x224 and then cropping from the center
-    size = (224, 224)
-    image = ImageOps.fit(image, size, Image.Resampling.LANCZOS)
+    # resizing to 224x224 and crop from center
+    image_size = (224, 224)
+    image = ImageOps.fit(image, image_size, Image.Resampling.LANCZOS)
 
-    # turn the image into a numpy array
     image_array = np.asarray(image)
-
-    # plot and show the image first
 
     plt.imshow(image_array)
     plt.show()
 
-    # Normalize the image
     normalized_image_array = (image_array.astype(np.float32) / 127.5) - 1
 
-    # Load the image into the array
     data[0] = normalized_image_array
 
-    # Predicts the model
     prediction = model.predict(data)
     index = np.argmax(prediction)
     class_name = class_names[index]
     confidence_score = prediction[0][index]
 
-    # Print prediction and confidence score
     print("Class:", class_name[2:], end="")
     print("Confidence Score:", confidence_score)
 
 
-def evaluate_model_on_testset(model_path, labels_path, testset_directory):
-    # Load the model and labels
+def evaluate_model_on_testset(model_dir, testset_directory):
+
+    model_path = f"{model_dir}/keras_model.h5"
+    labels_path = f"{model_dir}/labels.txt"
+
     model = load_model(model_path, compile=False)
 
     # Read the class names and create a mapping from class names to integer labels
     with open(labels_path, "r") as f:
         label_mappings = {line.split()[1]: int(line.split()[0]) for line in f.readlines()}
 
-    image_paths = []  # This will hold the paths of all images
-    true_labels = []  # This will hold the true labels for all images
+    image_paths = []
+    true_labels = []
 
     # Collect all image paths and their corresponding true labels
     for category_folder in os.listdir(testset_directory):
@@ -85,9 +69,7 @@ def evaluate_model_on_testset(model_path, labels_path, testset_directory):
                     image_paths.append(os.path.join(category_path, image_name))
                     true_labels.append(true_label_int)
 
-    # Initialize the data array with the right shape
-    n_images = len(image_paths)
-    data = np.ndarray(shape=(n_images, 224, 224, 3), dtype=np.float32)
+    data = np.ndarray(shape=(len(image_paths), 224, 224, 3), dtype=np.float32)
 
     # Process each image and load into the data array
     for i, image_path in enumerate(image_paths):
@@ -103,37 +85,37 @@ def evaluate_model_on_testset(model_path, labels_path, testset_directory):
     predicted_indices = np.argmax(predictions, axis=1)
 
     # Calculate the test accuracy
-    accuracy = accuracy_score(true_labels, predicted_indices)
-    return accuracy
+    return accuracy_score(true_labels, predicted_indices)
 
-# Add this function to update the CSV with the student's score
-def update_student_score_in_csv(email, score, csv_file_path):
-    updated = False
-    with open(csv_file_path, 'r') as file:
-        reader = csv.reader(file)
-        data = list(reader)
 
-    for row in data:
-        if email in row:
-            row[-1] = f"{score:.4f}"
-            updated = True
-            break
+def record_students_score(pseudonym, score, csv_file_path):
 
-    if updated:
-        with open(csv_file_path, 'w', newline='') as file:
-            writer = csv.writer(file)
-            writer.writerows(data)
+    if not os.path.exists(csv_file_path):
+        # Create a DataFrame with just the headers, and save it
+        pd.DataFrame(columns=["pseudonym", "accuracy"]).to_csv(csv_file_path, index=False)
 
-# Press the green button in the gutter to run the script.
+    df = pd.read_csv(csv_file_path)
+
+    if pseudonym in df["pseudonym"].values:
+        print(f"Pseudonym '{pseudonym}' already exists in the leaderboard. Not updating.")
+        exit(1)
+
+    new_row_df = pd.DataFrame([{"pseudonym": pseudonym, "accuracy": f"{score:.4f}"}])
+    df = pd.concat([df, new_row_df], ignore_index=True)
+
+    df.to_csv(csv_file_path, index=False)
+    print(f"New entry for pseudonym '{pseudonym}' recorded with score {score:.4f}.")
+
+
 if __name__ == '__main__':
-    # Adjust these paths to match your directory structure
-    name = input("Enter your name: ")
-    model_dir = f"models/{name}" # YOUR NAME
-    # create that subdirectory for name if it does not exist, otherwise prompt the user with a failure message
-    if not os.path.exists(model_dir):
-        os.makedirs(model_dir)
+
+    pseudonym = input("Enter an imaginary name for the contest: ")
+    student_dir = f"models/{pseudonym}"
+
+    if not os.path.exists(student_dir):
+        os.makedirs(student_dir)
     else:
-        print(f"Directory {model_dir} already exists. Please delete it or choose a different name.")
+        print(f"Directory {student_dir} already exists. Please delete it or choose a different name.")
         exit(1)
 
     # Define the path to the downloaded zip file
@@ -141,7 +123,7 @@ if __name__ == '__main__':
 
     # Check if the zip file exists
     if os.path.exists(zip_path):
-        target_dir = os.path.join(model_dir, "converted_keras")
+        target_dir = os.path.join(student_dir, "converted_keras")
         # Create the target directory if it doesn't exist
         if not os.path.exists(target_dir):
             os.makedirs(target_dir)
@@ -160,9 +142,10 @@ if __name__ == '__main__':
         exit(1)
 
 
-    model_path = f"{model_dir}/converted_keras/keras_model.h5"
-    labels_path = f"{model_dir}/converted_keras/labels.txt"
+    model_dir = f"{student_dir}/converted_keras/"
     testset_directory = "final_testset/"
 
-    test_accuracy = evaluate_model_on_testset(model_path, labels_path, testset_directory)
+    test_accuracy = evaluate_model_on_testset(model_dir, testset_directory)
     print("Test accuracy:", f"{test_accuracy:.4f}")
+
+    record_students_score(pseudonym, test_accuracy, "leaderboard.csv")
