@@ -1,6 +1,6 @@
-# Teachable Machine Leaderboard
+# KI-Challenge der FIDS
 
-This page displays the most recent leaderboard for the students.
+Dieser Wettbewerb findet am 14. Februar 2025 während der Regensburger Hochschultage statt. Die Fakultät Informatik und Datascience (FIDS) veranstaltet diesen Wettbewerb. Die Studierenden sollten um 11:50 Uhr wieder am Stand 52 sein, um den Preis von 20€ Amazon-Gutschein zu gewinnen.
 
 ## Leaderboard
 
@@ -8,11 +8,12 @@ This page displays the most recent leaderboard for the students.
   <thead>
     <tr>
       <th>Pseudonym</th>
-      <th>Accuracy</th>
+      <th>Genauigkeit</th>
     </tr>
   </thead>
   <tbody>
-    {% for row in site.data.leaderboard %}
+    {% assign sorted_leaderboard = site.data.leaderboard | sort: 'accuracy' | reverse %}
+    {% for row in sorted_leaderboard %}
     <tr>
       <td>{{ row.pseudonym }}</td>
       <td>{{ row.accuracy }}</td>
