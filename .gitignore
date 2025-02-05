@@ -5,7 +5,6 @@
 *.ipr
 *.iws
 *.xlsx
-*.csv
 .idea/
 .gradle/
 
