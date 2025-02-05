@@ -148,4 +148,4 @@ if __name__ == '__main__':
     test_accuracy = evaluate_model_on_testset(model_dir, testset_directory)
     print("Test accuracy:", f"{test_accuracy:.4f}")
 
-    record_students_score(pseudonym, test_accuracy, "leaderboard.csv")
+    record_students_score(pseudonym, test_accuracy, "_data/leaderboard.csv")
