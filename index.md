@@ -1,6 +1,11 @@
 # KI-Challenge der FIDS
 
-Dieser Wettbewerb findet am 14. Februar 2025 während der Regensburger Hochschultage statt. Die Fakultät Informatik und Datascience (FIDS) veranstaltet diesen Wettbewerb. Die Studierenden sollten um 11:50 Uhr wieder am Stand 52 sein, um den Preis von 20€ Amazon-Gutschein zu gewinnen. Der Preis geht an die Person, die als Erste oder Beste um 11:50 Uhr wieder am Stand 52 erscheint.
+Willkommen zum KI-Wettbewerb der Fakultät für Informatik & Data Science (FIDS) der Universität Regensburg.
+
+Die Challenge findet am 14. Februar 2025 von 9:00 bis 11:50 Uhr am Stand 52 statt.
+Die beste Teilnehmerin / der beste Teilnehmer erhält den Preis um 11:50 Uhr.
+
+[Hier findet ihr eine Übersicht der Stände auf Seite 12](https://www.regensburger-hochschultag.de/wp-content/uploads/2025/01/RHT_2025_Programmheft_Web.pdf)
 
 <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -25,3 +30,9 @@ Dieser Wettbewerb findet am 14. Februar 2025 während der Regensburger Hochschul
     {% endfor %}
   </tbody>
 </table>
+
+Wir freuen uns, dass du dein eigenes Modell für die KI-Challenge der FIDS erstellt hast!
+Merk dir dein Pseudonym, um später zu sehen, ob du gewonnen hast!
+Wir hoffen, dass du Spaß an unserer Challenge hattest und freuen uns dich an der FIDS für ein Studium begrüßen zu dürfen.
+
+P.s.: Damit ihr genügend Zeit habt und eine einfachere Abreise von der Uni ermöglicht wird, werden wir um 11:50 Uhr den Wettbewerb beenden. Der / Die beste zu diesem Zeitpunkt wird den Preis erhalten.
