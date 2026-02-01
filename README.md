@@ -2,6 +2,14 @@
 
 This guide provides instructions on how to set up the Python environment required for running the Teachable Machine project on macOS, specifically optimized for Apple Silicon (M1/M2 chips).
 
+## Leaderboard & AI-Challenge Webpage
+
+- [Teachable Machine Student Contest Leaderboard](https://nicohambauer.github.io/teachable-machine-student-contest/)
+
+## Tool for AI Model Training
+
+- [Teachable Machine by Google](https://teachablemachine.withgoogle.com)
+
 ## Requirements
 
 - Conda (Miniconda or Anaconda)
