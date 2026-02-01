@@ -29,4 +29,11 @@ Hier kannst du ganz einfach dein eigenes KI-Modell für die Klassifikation von B
 </table>
 
 **Merk dir dein Pseudonym**, um später zu sehen, ob du gewonnen hast!  
+
+Die Genauigkeit deines Modells ist in folgenden Bereichen zu verorten:
+- **< 40%**: Gut gemacht! Du hast die Grundlagen der KI verstanden.
+- **40% - 50%**: Sehr gut! Du hast ein solides Verständnis für KI-Modelle.
+- **50% - 65%**: Hervorragend! Du bist ein echter KI-Enthusiast.
+- **> 65%**: Fantastisch! Du bist ein KI-Profi!
+
 Wir hoffen, dass du Spaß an unserer Challenge hattest und freuen uns, dich an der FIDS für ein Studium begrüßen zu dürfen.
