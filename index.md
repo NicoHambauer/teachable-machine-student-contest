@@ -1,15 +1,8 @@
 # KI-Challenge der FIDS
 
-**Willkommen zum KI-Wettbewerb** der Fakultät für Informatik & Data Science (FIDS) der Universität Regensburg.
+**Willkommen zur KI-Challenge** der Fakultät für Informatik & Data Science (FIDS) der Universität Regensburg.
 
-**Datum:** 14. Februar 2025  
-**Zeit:** 9:00 - 12:30 Uhr  
-**Ort:** Stand 52
-
-**Preisverleihung:** 12:15 Uhr für die beste Teilnehmerin / den besten Teilnehmer.
-Neue Uhrzeit: Bish maximal 12:30 Uhr abholen.
-
-[Übersicht der Stände (Seite 7 von 11)](https://www.regensburger-hochschultag.de/wp-content/uploads/2025/01/RHT_2025_Programmheft_Web.pdf)
+Hier kannst du ganz einfach dein eigenes KI-Modell für die Klassifikation von Bildern entwerfen!
 
 <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -37,5 +30,3 @@ Neue Uhrzeit: Bish maximal 12:30 Uhr abholen.
 
 **Merk dir dein Pseudonym**, um später zu sehen, ob du gewonnen hast!  
 Wir hoffen, dass du Spaß an unserer Challenge hattest und freuen uns, dich an der FIDS für ein Studium begrüßen zu dürfen.
-
-**Hinweis:** Der Wettbewerb endet um 12:15 Uhr, um eine einfachere Abreise zu ermöglichen. Der / Die beste zu diesem Zeitpunkt wird den Preis erhalten.
