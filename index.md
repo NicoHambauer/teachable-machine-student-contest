@@ -1,11 +1,11 @@
 # KI-Challenge der FIDS
 
-**Willkommen zum KI-Wettbewerb** der Fakultät für Informatik & Data Science (FIDS) der Universität Regensburg (UR).
-**Datum:** 13. Februar 2026
-**Zeitraum der FIDS-KI-Challenge:** 9:00 - 12:30 Uhr
-**Ort:** Stand 50 - Information Systems / Wirtschaftsinformatik B.Sc. / B.A. 
+**Willkommen zum KI-Wettbewerb** der Fakultät für Informatik & Data Science (FIDS) der Universität Regensburg (UR). <br>
+**Datum:** 13. Februar 2026 <br>
+**Zeitraum der FIDS-KI-Challenge:** 9:00 - 13:00 Uhr <br>
+**Ort:** Stand 50 - Information Systems / Wirtschaftsinformatik B.Sc. / B.A. <br>
 
-**Preisverleihung:** 12:30 Uhr. Der Preis (20€ Gutschein) wird an den **ersten Platz** im Leaderboard vergeben.
+**Preisverleihung:** Der Preis wird um **13:15 Uhr** an den **ersten Platz** im Leaderboard vergeben.
 
 <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -31,8 +31,6 @@
   </tbody>
 </table>
 
-# Teilnahme-Informationen
-
 ## Wie kannst du teilnehmen?
 
 **Merk dir dein Pseudonym**, um später zu sehen, ob du gewonnen hast!
@@ -56,6 +54,8 @@ Es ist ganz einfach und für die Teilnahme benötigst du keine Vorkenntnisse in 
 Wir haben ungefähr 1000 Test-Bilder selbst aufgenommen.
 Deine Genauigkeit wird berechnet, indem die Anzahl der korrekt klassifizierten Bilder durch die Gesamtzahl der Test-Bilder geteilt wird.
 
+Eine Genauigkeit von 50% bedeutet, dass dein Modell 500 von 1000 Test-Bildern korrekt klassifiziert hat.
+
 ## Was sagt meine Genauigkeit aus?
 
 Die Genauigkeit deines Modells ist in folgenden Bereichen zu verorten:
@@ -64,7 +64,7 @@ Die Genauigkeit deines Modells ist in folgenden Bereichen zu verorten:
 - **50% - 65%**: Hervorragend! Du bist ein echter KI-Enthusiast.
 - **> 65%**: Fantastisch! Du bist ein KI-Profi!
 
-
+## Wie finde Ich weitere Stände auf dem Regensburger Hochschultag?
 
 [Übersicht der Stände und Stand Information Systems / Wirtschaftsinformatik (Seite 8)](https://www.regensburger-hochschultag.de/wp-content/uploads/2026/01/RHT_2026_Programmheft_Web.pdf)
 
