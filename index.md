@@ -2,11 +2,11 @@
 **Willkommen** zur **KI-Challenge** der Fakultät für Informatik & Data Science (FIDS) der Universität Regensburg (UR).
 
 **Datum:** 13. Februar 2026 <br>
-**Zeitraum der FIDS-KI-Challenge:** 9:00 - 12:45 Uhr <br>
+**Zeitraum der FIDS-KI-Challenge:** 9:00 - 12:30 Uhr <br>
 **Ort:** Stand 50 - Information Systems / Wirtschaftsinformatik B.Sc. / B.A. <br>
 [Übersicht der Stände (ab Seite 8)](https://www.regensburger-hochschultag.de/wp-content/uploads/2026/01/RHT_2026_Programmheft_Web.pdf)
 
-**Preisverleihung:** Der Preis wird um **12:50 Uhr** an den **ersten Platz** im Leaderboard vergeben.
+**Preisverleihung:** Der Preis wird um **12:40 Uhr** an den **ersten Platz** im Leaderboard vergeben.
 
 <link rel="stylesheet" type="text/css" href="style.css">
 
