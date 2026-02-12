@@ -1,4 +1,4 @@
-# Nico Hambauer <nico.hambauer@fau.de> 2024
+# Nico Hambauer <nico.hambauer@ur.de> 2026
 import os
 import pandas as pd
 import zipfile
