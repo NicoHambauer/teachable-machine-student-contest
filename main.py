@@ -130,6 +130,31 @@ if __name__ == '__main__':
         # Unzip the file into the target directory
         with zipfile.ZipFile(zip_path, 'r') as zip_ref:
             zip_ref.extractall(target_dir)
+
+        # Remove __MACOSX folder if it exists
+        macosx_dir = os.path.join(target_dir, "__MACOSX")
+        if os.path.exists(macosx_dir):
+            import shutil
+
+            shutil.rmtree(macosx_dir)
+
+            # Fix nested converted_keras/converted_keras structure
+            nested_dir = os.path.join(target_dir, "converted_keras")
+            if os.path.isdir(nested_dir):
+                for item in os.listdir(nested_dir):
+                    src = os.path.join(nested_dir, item)
+                    dst = os.path.join(target_dir, item)
+
+                    # Move file/folder up one level
+                    if os.path.exists(dst):
+                        # Optional safety: overwrite if needed
+                        os.remove(dst) if os.path.isfile(dst) else shutil.rmtree(dst)
+
+                    shutil.move(src, dst)
+
+                # Remove the now empty nested folder
+                os.rmdir(nested_dir)
+
         # Check if the files were extracted successfully
         if os.path.exists(f"{target_dir}/keras_model.h5") and os.path.exists(f"{target_dir}/labels.txt"):
             # Delete the zip file
